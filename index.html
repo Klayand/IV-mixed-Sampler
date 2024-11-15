@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>IV-Mixed Sampler: Leveraging Image Diffusion Models for Enhanced Video Synthesis</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <!-- custom css file  -->
+  <link rel="stylesheet" href="./static/css/twentytwenty.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    .custom-slider-container {
+        width: 100%;
+        max-width: 900px; 
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .custom-slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .custom-slide {
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .custom-gif-wrapper {
+        display: flex;
+        justify-content: center; /* Horizontally centers the content */
+        align-items: center;     /* Vertically centers the content */
+        width: 100%;
+        height: 100%;            /* Ensures the height of the container is considered */
+    }
+
+    .custom-gif-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Vertically centers the video within the container */
+        align-items: center;     /* Horizontally centers the video within the container */
+        width: 30%;              /* Keeps the same width as before for each video container */
+        height: 100%;            /* Ensures the height of the container is used */
+    }
+
+
+    .custom-gif-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    .custom-caption {
+        text-align: center;
+        margin-top: 5px;
+        font-weight: bold; /* Makes the caption bold */
+        font-size: 18px; /* Increases the font size (adjust as needed) */
+    }
+
+    .custom-top-caption {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+
+    .custom-arrow {
+      position: absolute;
+      top: 47%; /* Vertically centers the arrows */
+      transform: translateY(-50%); /* Centers vertically */
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      font-size: 20px;
+      padding: 12px;
+      cursor: pointer;
+      z-index: 10; /* Ensure the arrows are above the videos */
+    }
+
+    .text-with-margin {
+      margin-top: 10px; /* Adds 20px space above the text */
+      margin-bottom: 50px;
+    }
+
+    .custom-prev {
+        left: -5px; /* Positions the left arrow slightly outside the video container */
+    }
+
+    .custom-next {
+        right: -5px; /* Positions the right arrow slightly outside the video container */
+    }
+
+    .custom-gif-container:not(:last-child) {
+        margin-right: 40px;
+    }
+
+    .dots-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+    .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 5px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .active {
+        background-color: #717171;
+    }
+  </style>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">IV-Mixed Sampler: Leveraging Image Diffusion Models for Enhanced Video Synthesis</h1>
+            <div class="is-size-4 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                Anonymous</span>
+            </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Hero Teaser -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- <div id="results-carousel" class="carousel results-carousel"> -->
+      <div id="results-small" class="carousel results-small">
+
+        <div class="item">
+          <div class="twentytwenty-container main-container" data-orientation="horizontal" ratio="0.5556">
+            <!-- <div class="desc">ModelScope+FreeInit</div> -->
+            <!-- <div class="twentytwenty-container" data-orientation="horizontal"> -->
+              <img src="./static/images/videocrafter/ship_ori.gif" width="100%" />
+              <img src="./static/images/videocrafter/ship_new.gif" width="100%" />
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container main-container" data-orientation="horizontal" ratio="0.5556">
+            <!-- <div class="desc">AnimateDiff+FreeInit</div> -->
+            <!-- <div class="twentytwenty-container" data-orientation="horizontal"> -->
+              <img src="./static/images/videocrafter/spaceship_ori.gif" width="100%" />
+              <img src="./static/images/videocrafter/spaceship_new.gif" width="100%" />
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container main-container" data-orientation="horizontal" ratio="0.5556">
+            <!-- <div class="desc">AnimateDiff+FreeInit</div> -->
+            <!-- <div class="twentytwenty-container" data-orientation="horizontal"> -->
+              <img src="./static/images/snow_ori.gif" width="100%" />
+              <img src="./static/images/snow_new.gif" width="100%" />
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container main-container" data-orientation="horizontal" ratio="0.5556">
+            <!-- <div class="desc">AnimateDiff+FreeInit</div> -->
+            <!-- <div class="twentytwenty-container" data-orientation="horizontal"> -->
+              <img src="./static/images/cabin_ori.gif" width="100%" />
+              <img src="./static/images/cabin_new.gif" width="100%" />
+            <!-- </div> -->
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container main-container" data-orientation="horizontal" ratio="0.5556">
+            <!-- <div class="desc">AnimateDiff+FreeInit</div> -->
+            <!-- <div class="twentytwenty-container" data-orientation="horizontal"> -->
+              <img src="./static/images/videocrafter/car_ori.gif" width="100%" />
+              <img src="./static/images/videocrafter/car_new.gif" width="100%" />
+            <!-- </div> -->
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container main-container" data-orientation="horizontal" ratio="0.5556">
+            <!-- <div class="desc">ModelScope+FreeInit</div> -->
+            <!-- <div class="twentytwenty-container" data-orientation="horizontal"> -->
+              <img src="./static/images/videocrafter/friend_ori.gif" width="100%" />
+              <img src="./static/images/videocrafter/friend_new.gif" width="100%" />
+            <!-- </div> -->
+          </div>
+        </div>
+
+
+      </div>
+  </div>
+  <div class="spacer"></div>
+</section>
+
+<!-- End Teaser Video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p style="font-size:18px;">
+            The multi-step sampling mechanism, a key feature of visual diffusion models, has significant potential to replicate the success of OpenAI's Strawberry in enhancing performance by increasing the inference computational cost. Sufficient prior studies have demonstrated that correctly scaling up computation in the sampling process can successfully lead to improved generation quality, enhanced image editing, and compositional generalization. While there have been rapid advancements in developing inference-heavy algorithms for improved image generation, relatively little work has explored inference scaling laws in video diffusion models (VDMs). Furthermore, existing research shows only minimal performance gains that are perceptible to the naked eye. To address this, we design a novel training-free algorithm IV-Mixed Sampler that leverages the strengths of image diffusion models (IDMs) to assist VDMs surpass their current capabilities. The core of IV-Mixed Sampler is to use IDMs to significantly enhance the quality of each video frame and VDMs ensure the temporal coherence of the video during the sampling process. Our experiments have demonstrated that IV-Mixed Sampler achieves state-of-the-art performance on 4 benchmarks including UCF-101-FVD, MSR-VTT-FVD, Chronomagic-Bench-150, and Chronomagic-Bench-1649. For example, the open-source Animatediff with IV-Mixed Sampler reduces the UMT-FVD score from 275.2 to 228.6, closing to 223.1 from the closed-source Pika-2.0.        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</section>
+<!-- End paper abstract -->
+
+<!-- Paper Contribution-->
+<section class="hero is-small">
+
+  <div class="hero-body">
+    <!-- <div class="container"> -->
+    <div class="container is-max-desktop"  style="margin-top:5px;">
+
+      <div class="section-title has-text-centered">
+        <h2 class="title is-4">Contribution</h2>
+      </div>
+         
+      <p class="text-with-margin" style="font-size:18px;">Specifically, 1) we construct IV-mixed Sampler under a rigorous mathematical framework and demonstrate, through theoretical analysis, that it can be elegantly transformed into a standard inverse ordinary differential equation (ODE) process. For the sake of intuition, we present IV-mixed Sampler (w.r.t., “IV-IV”) on Fig. 3 and its pseudo code in Appendix B. 2) The empirically optimal IV-mixed Sampler further reduces the UMT-FVD by approximately 10 points compared to the best “I-I” in Fig. 2 and by 39.72 points over FreeInit. Furthermore, 3) we conduct sufficient ablation studies to determine which classifier-free guidance (CFG) scale and which sampling paradigm yield the best performance for various metrics at what sampling intervals. In addition to this, 4) qualitative and quantitative comparison experiments have amply demonstrated that our algorithm achieves state-of-the-art (SOTA) performance on four popular benchmarks: UCF-101-FVD, MSR-VTT-FVD, Chronomagic-Bench-150, and Chronomagic-1649. These competitive outcomes demonstrate that our proposed IV-mixed Sampler dramatically improves the visual quality and semantic faithfulness of the synthesized video.</p>
+    
+    </div>
+  </div>
+</section>
+<!-- End Papaer Contribution-->
+
+
+<!-- Method -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-sixths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <img src="static/images/pipeline.jpg" alt="fig_pipeline"/>
+          <p style=" font-size:18px; margin-top:30px;">
+            VideoGuide enhances temporal quality in video diffusion models without additional training 
+            or fine-tuning by leveraging a pretrained model as a guide. During inference, it uses a 
+            teacher model to provide a temporally consistent sample, which is interpolated with 
+            the student model's output to improve consistency. This process is applied only in the early 
+            steps of inference and includes a low-pass filter to refine high-frequency details. 
+            VideoGuide effectively improves temporal consistency while preserving imaging quality and motion smoothness.
+          </p>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Method -->
+
+
+
+
+<!-- Youtube video -->
+<section class="hero is-small is-light">
+  
+  <div class="hero-body">
+    <!-- <div class="container"> -->
+    <div class="container is-max-desktop"  style="margin-top:30px;">
+      <div class="section-title has-text-centered">
+        <h2 class="title is-3">Experimental Results</h2>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="section-title has-text-centered">
+        <h2 class="title is-4">AnimateDiff with IV-mixed Sampler</h2>
+      </div>
+
+      
+      <div id="results-carousel" class="carousel results-carousel">
+
+  
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+            <div class="desc">A pirate ship navigating stormy seas under dark, ominous clouds, with lightning illuminating the ocean.</div>
+            <div class="video">
+              <img src="./static/images/animatediff/ship_ori.gif" width="100%" />
+            </div>
+            <div class="video">
+              <img src="./static/images/animatediff/ship_new.gif" width="100%" />
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+            <div class="desc">Colorful nebulae and distant stars in the background.</div>
+            <div class="video">
+              <img src="./static/images/animatediff/star_ori.gif" width="100%" />
+            </div>
+            <div class="video">
+              <img src="./static/images/animatediff/star_new.gif" width="100%" />
+            </div>
+          </div>
+        </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">Two horses race across a grassy field at sunset.</div>
+              <div class="video">
+                <img src="./static/images/animatediff/horse_ori.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/animatediff/horse_new.gif" width="100%" />
+              </div>
+            </div>
+          </div> 
+        
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">An epic tornado attacking above aglowing city at night.</div>
+              <div class="video">
+                <img src="./static/images/animatediff/epic_ori.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/animatediff/epic_new.gif" width="100%" />
+              </div>
+            </div>
+          </div>   
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A snowy mountain peak, a lone skier carving through powder.</div>
+              <div class="video">
+                <img src="./static/images/animatediff/peak_ori.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/animatediff/peak_new.gif" width="100%" />
+              </div>
+            </div>
+          </div>  
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A group of friends sitting around a campfire on a beach at night, with the stars twinkling overhead and the sound of waves in the background.</div>
+              <div class="video">
+                <img src="./static/images/animatediff/friend_ori.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/animatediff/friend_new.gif" width="100%" />
+              </div>
+            </div>
+          </div>  
+
+      </div>
+
+      
+      <div class="spacer"></div>
+
+      <div class="section-title has-text-centered">
+        <h2 class="title is-4">ModelScope with IV-mixed Sampler</h2>
+      </div>
+      
+      <div id="results-carousel" class="carousel results-carousel">
+
+  
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+            <div class="desc">Time-lapse of a 3D printing process creating a model of the Statue of Liberty.</div>
+            <div class="video">
+              <img src="./static/images/modelscope/3d_printing_08.gif" width="100%" />
+            </div>
+            <div class="video">
+              <img src="./static/images/modelscope/3d_printing_08-new.gif" width="100%" />
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+            <div class="desc">Time-lapse of a succulent-shaped candle burning over 42 minutes.</div>
+            <div class="video">
+              <img src="./static/images/modelscope/candle_burning_10.gif" width="100%" />
+            </div>
+            <div class="video">
+              <img src="./static/images/modelscope/candle_burning_10-new.gif" width="100%" />
+            </div>
+          </div>
+        </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">Time-lapse of a marbled cake baking process.</div>
+              <div class="video">
+                <img src="./static/images/modelscope/baking_13.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/modelscope/baking_13-new.gif" width="100%" />
+              </div>
+            </div>
+          </div> 
+        
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">Time-lapse of a lunar eclipse.</div>
+              <div class="video">
+                <img src="./static/images/modelscope/lunar_eclipse_08.1.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/modelscope/3d_printing_08-new.gif" width="100%" />
+              </div>
+            </div>
+          </div>   
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">Time-lapse of a plant with narrow, elongated leaves, highlighting growth over 96 days.</div>
+              <div class="video">
+                <img src="./static/images/modelscope/plant_growing_15.0.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/modelscope/plant_growing_15.0-new.gif" width="100%" />
+              </div>
+            </div>
+          </div>  
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">Time-lapse of bananas decaying over 74 days.</div>
+              <div class="video">
+                <img src="./static/images/modelscope/fruit_rotting_20.0.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/modelscope/fruit_rotting_20.0-new.gif" width="100%" />
+              </div>
+            </div>
+          </div>  
+
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="section-title has-text-centered">
+        <h2 class="title is-4">VideoCrafterV2 with IV-mixed Sampler</h2>
+      </div>
+      
+      <div id="results-carousel" class="carousel results-carousel">
+
+  
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+            <div class="desc">A pirate ship navigating stormy seas under dark, ominous clouds, with lightning illuminating the ocean.</div>
+            <div class="video">
+              <img src="./static/images/videocrafter/ship_ori.gif" width="100%" />
+            </div>
+            <div class="video">
+              <img src="./static/images/videocrafter/ship_new.gif" width="100%" />
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+            <div class="desc">A futuristic racecar speeding through a tunnel of neon lights, leaving a trail of glowing energy behind it.</div>
+            <div class="video">
+              <img src="./static/images/videocrafter/car_ori.gif" width="100%" />
+            </div>
+            <div class="video">
+              <img src="./static/images/videocrafter/car_new.gif" width="100%" />
+            </div>
+          </div>
+        </div>
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A group of friends sitting around a campfire on a beach at night, with the stars twinkling overhead and the sound of waves in the background.</div>
+              <div class="video">
+                <img src="./static/images/videocrafter/friend_ori.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/videocrafter/friend_new.gif" width="100%" />
+              </div>
+            </div>
+          </div> 
+        
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A futuristic spaceship flying through a vibrant nebula, with swirling clouds of gas and stars shining in the distance.</div>
+              <div class="video">
+                <img src="./static/images/videocrafter/spaceship_ori.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/videocrafter/spaceship_new.gif" width="100%" />
+              </div>
+            </div>
+          </div>   
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A group of explorers standing before the entrance to an ancient temple hidden deep in the jungle, with vines hanging from the stone walls.</div>
+              <div class="video">
+                <img src="./static/images/videocrafter/explore_ori.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/videocrafter/explore_new.gif" width="100%" />
+              </div>
+            </div>
+          </div>  
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
+              <div class="desc">A surfer riding a massive wave during a golden sunset, with dolphins jumping out of the water beside him.</div>
+              <div class="video">
+                <img src="./static/images/videocrafter/ride_ori.gif" width="100%" />
+              </div>
+              <div class="video">
+                <img src="./static/images/videocrafter/ride_new.gif" width="100%" />
+              </div>
+            </div>
+          </div>  
+
+      </div>
+    </div>
+  </section>
+
+    <div class="spacer"></div>
+
+
+  <!--Frame Visualization and Experiments-->
+  <section class="hero is-small">
+
+    <div class="hero-body">
+      <!-- <div class="container"> -->
+      <div class="container is-max-desktop"  style="margin-top:5px;">
+
+        <div class="section-title has-text-centered">
+          <h2 class="title is-4">Frame by Frame Visualization</h2>
+        </div>
+        
+        <div class="item pd-image">
+          <img src="./static/images/visualization.jpg" width="100%" />
+        </div>
+           
+        <p class="text-with-margin" style="font-size:18px;">Visualization of IV-mixed Sampler and the standard DDIM sampling on Animatediff and VideoCrafterV2. Unlike prior heavy-inference approaches, IV-mixed Sampler is able to significantly improve the fidelity of the video while guaranteeing semantic faithfulness.</p>
+      
+      </div>
+
+      <div class="container is-max-desktop"  style="margin-top:5px;">
+
+        <div class="section-title has-text-centered">
+          <h2 class="title is-4">Quantitive Evaluations</h2>
+        </div>
+        
+        <div class="item pd-image">
+          <img src="./static/images/exp_1.jpg" width="100%" />
+        </div>
+        <div class="item pd-image">
+          <img src="./static/images/exp_2.jpg" width="100%" />
+        </div>
+                 
+      </div>
+    </div>
+  </section>
+
+
+<!--Conclusion-->
+<section class="hero is-small">
+
+  <div class="hero-body">
+    <!-- <div class="container"> -->
+    <div class="container is-max-desktop"  style="margin-top:5px;">
+
+      <div class="section-title has-text-centered">
+        <h2 class="title is-4">Conclusion</h2>
+      </div>
+      
+         
+      <p class="text-with-margin" style="font-size:18px;">In this paper, we propose IV-mixed Sampler to enhance the visual quality of synthesized videos by leveraging an IDM while ensuring temporal coherence through a VDM. The algorithm utilizes DDIM and DDIM-Inversion to correct latent representations x_t at any time point t, enabling seamless integration into any VDM and sampling interval. IV-mixed Sampler can be formulated as an ODE, achieving a trade-off between visual quality and temporal coherence by adjusting the CFG scales of both the IDM and VDM. In the future, we plan to fine-tune several stronger IDMs, such as FLUX, to better adapt the latent space of target VDMs, thereby further enhancing the performance of VDMs. We anticipate IV-mixed Sampler will be widely applicable in vision generation tasks.</p>
+    
+    </div>
+  </div>
+</section>
+
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- custom js file  -->
+<!-- <script defer src="./assets/js/fontawesome.all.min.js"></script> -->
+<script src="./static/js/bulma-carousel.min.js"></script>
+<script src="./static/js/bulma-slider.min.js"></script>
+<script src="./static/js/index.js"></script>
+<script src="./static/js/jquery.event.move.js"></script>
+<script src="./static/js/jquery.twentytwenty.js"></script>
+<script>
+$(function(){
+  $(".twentytwenty-container").twentytwenty({
+    default_offset_pct: 0.5, // How much of the before image is visible when the page loads
+    orientation: 'horizontal', // Orientation of the before and after images ('horizontal' or 'vertical')
+    // before_label: 'January 2017', // Set a custom before label
+    // after_label: 'March 2017', // Set a custom after label
+    // no_overlay: true, //Do not show the overlay with before and after
+    // move_slider_on_hover: true, // Move slider on mouse hover?
+    // move_with_handle_only: true, // Allow a user to swipe anywhere on the image to control slider movement. 
+    // click_to_move: false // Allow a user to click (or tap) anywhere on the image to move the slider to that location.
+  });
+});
+
+$(function(){
+  $(".main-container").twentytwenty({default_offset_pct: 0.1, orientation: 'horizontal'});
+  // $(".twentytwenty-container", "#results-carousel").twentytwenty({default_offset_pct: 0.5, ratio: 0.5});
+});
+</script>
+
+<script>
+    let currentCustomIndex = 0;
+    const customSlider = document.getElementById('custom-slider');
+    const totalCustomSlides = document.querySelectorAll('.custom-slide').length;
+    const dots = document.querySelectorAll('.dot');
+
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            dot.classList.remove('active');
+            if (index === currentCustomIndex) {
+                dot.classList.add('active');
+            }
+        });
+    }
+
+    function moveCustomSlide(direction) {
+        currentCustomIndex += direction;
+        if (currentCustomIndex < 0) {
+            currentCustomIndex = totalCustomSlides - 1;
+        } else if (currentCustomIndex >= totalCustomSlides) {
+            currentCustomIndex = 0;
+        }
+        customSlider.style.transform = `translateX(-${currentCustomIndex * 100}%)`;
+        updateDots();
+    }
+
+    function setCurrentSlide(index) {
+        currentCustomIndex = index;
+        customSlider.style.transform = `translateX(-${currentCustomIndex * 100}%)`;
+        updateDots();
+    }
+
+
+    updateDots();
+</script>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
