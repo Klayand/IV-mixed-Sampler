@@ -191,5 +191,40 @@ body {
   font-size: smaller;
 }
 
+.mochi-container {  
+  display: flex;  
+  justify-content: space-around;  
+  flex-wrap: wrap;  
+}  
 
+.video-title {  
+  text-align: center;
+} 
+
+.description-container {  
+  margin: 20px 0;    
+  padding: 15px;      
+  background-color: #e9ecef; 
+  border-radius: 8px;
+} 
+
+.overview-description {  
+  color: #555;        
+  margin: 10px 0;      
+}
+
+.video-wrapper {  
+  max-width: 45%;  
+  background-color: #fff;  
+  border-radius: 8px;  
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);  
+  margin: 10px;  
+  padding: 10px;  
+}  
+
+video {  
+  width: 100%;  
+  height: auto;  
+  border-radius: 4px;  
+}  
 

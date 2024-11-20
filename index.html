@@ -297,15 +297,6 @@
         <h2 class="title is-3">Method</h2>
         <div class="content has-text-justified">
           <img src="static/images/pipeline.jpg" alt="fig_pipeline"/>
-          <p style=" font-size:18px; margin-top:30px;">
-            VideoGuide enhances temporal quality in video diffusion models without additional training 
-            or fine-tuning by leveraging a pretrained model as a guide. During inference, it uses a 
-            teacher model to provide a temporally consistent sample, which is interpolated with 
-            the student model's output to improve consistency. This process is applied only in the early 
-            steps of inference and includes a low-pass filter to refine high-frequency details. 
-            VideoGuide effectively improves temporal consistency while preserving imaging quality and motion smoothness.
-          </p>
-      
         </div>
       </div>
     </div>
@@ -388,18 +379,6 @@
 
           <div class="item">
             <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
-              <div class="desc">A snowy mountain peak, a lone skier carving through powder.</div>
-              <div class="video">
-                <img src="./static/images/animatediff/peak_ori.gif" width="100%" />
-              </div>
-              <div class="video">
-                <img src="./static/images/animatediff/peak_new.gif" width="100%" />
-              </div>
-            </div>
-          </div>  
-
-          <div class="item">
-            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
               <div class="desc">A group of friends sitting around a campfire on a beach at night, with the stars twinkling overhead and the sound of waves in the background.</div>
               <div class="video">
                 <img src="./static/images/animatediff/friend_ori.gif" width="100%" />
@@ -447,18 +426,6 @@
             </div>
           </div>
         </div>
-
-          <div class="item">
-            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
-              <div class="desc">Time-lapse of a marbled cake baking process.</div>
-              <div class="video">
-                <img src="./static/images/modelscope/baking_13.gif" width="100%" />
-              </div>
-              <div class="video">
-                <img src="./static/images/modelscope/baking_13-new.gif" width="100%" />
-              </div>
-            </div>
-          </div> 
         
           <div class="item">
             <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
@@ -467,22 +434,10 @@
                 <img src="./static/images/modelscope/lunar_eclipse_08.1.gif" width="100%" />
               </div>
               <div class="video">
-                <img src="./static/images/modelscope/3d_printing_08-new.gif" width="100%" />
+                <img src="./static/images/modelscope/lunar_eclipse_08.1-new.gif" width="100%" />
               </div>
             </div>
           </div>   
-
-          <div class="item">
-            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
-              <div class="desc">Time-lapse of a plant with narrow, elongated leaves, highlighting growth over 96 days.</div>
-              <div class="video">
-                <img src="./static/images/modelscope/plant_growing_15.0.gif" width="100%" />
-              </div>
-              <div class="video">
-                <img src="./static/images/modelscope/plant_growing_15.0-new.gif" width="100%" />
-              </div>
-            </div>
-          </div>  
 
           <div class="item">
             <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
@@ -569,20 +524,84 @@
             </div>
           </div>  
 
-          <div class="item">
-            <div class="twentytwenty-container" data-orientation="horizontal" ratio="1">
-              <div class="desc">A surfer riding a massive wave during a golden sunset, with dolphins jumping out of the water beside him.</div>
-              <div class="video">
-                <img src="./static/images/videocrafter/ride_ori.gif" width="100%" />
-              </div>
-              <div class="video">
-                <img src="./static/images/videocrafter/ride_new.gif" width="100%" />
-              </div>
-            </div>
-          </div>  
-
       </div>
-    </div>
+
+      <div class="spacer"></div>
+
+      <div class="section-title has-text-centered">
+        <h2 class="title is-4">Mochi-1 with IV-mixed Sampler</h2>
+      </div>
+
+      <div class="mochi-container">
+        <div class="description-container">  
+          <p class="overview-description">A serene forest clearing at dawn, where deer graze peacefully while golden rays of sunlight pierce through the mist-laden trees.</p>  
+        </div>   
+        <div class="video-wrapper">
+            <h2 class="video-title">Standard</h2>  
+            <video controls>  
+                <source src="static/images/mochi/anime_ori.mp4" type="video/mp4">   
+            </video>  
+        </div>  
+        <div class="video-wrapper">  
+            <h2 class="video-title">Ours</h2>  
+            <video controls>  
+                <source src="static/images/mochi/anime_new.mp4" type="video/mp4">   
+            </video>  
+        </div>  
+      </div>  
+      <div class="mochi-container">
+        <div class="description-container">  
+          <p class="overview-description">An explorer standing at the edge of a massive desert canyon, with swirling sands below and towering rock formations stretching into the distance.</p>  
+        </div>     
+        <div class="video-wrapper">
+            <h2 class="video-title">Standard</h2>  
+            <video controls>  
+                <source src="static/images/mochi/people_ori.mp4" type="video/mp4">   
+            </video>  
+        </div>  
+        <div class="video-wrapper">  
+            <h2 class="video-title">Ours</h2>  
+            <video controls>  
+                <source src="static/images/mochi/people_new.mp4" type="video/mp4">   
+            </video>  
+        </div>  
+      </div>  
+
+      <div class="mochi-container"> 
+        <div class="description-container">  
+          <p class="overview-description">A young girl sitting on a windowsill, staring at a rainy cityscape while holding a steaming cup of tea.</p>  
+        </div>  
+        <div class="video-wrapper">  
+            <h2 class="video-title">Standard</h2>  
+            <video controls>  
+                <source src="static/images/mochi/girl_ori.mp4" type="video/mp4">   
+            </video>  
+        </div>  
+        <div class="video-wrapper">  
+            <h2 class="video-title">Ours</h2>  
+            <video controls>  
+                <source src="static/images/mochi/girl_new.mp4" type="video/mp4">   
+            </video>  
+        </div>  
+      </div>  
+
+      <div class="mochi-container"> 
+        <div class="description-container">  
+          <p class="overview-description">A futuristic cityscape at night, with glowing neon signs, flying cars weaving through towering skyscrapers, and bustling street markets below.</p>  
+        </div> 
+        <div class="video-wrapper">
+            <h2 class="video-title">Standard</h2>  
+            <video controls>  
+                <source src="static/images/mochi/house_ori.mp4" type="video/mp4">   
+            </video>  
+        </div>  
+        <div class="video-wrapper">  
+            <h2 class="video-title">Ours</h2>  
+            <video controls>  
+                <source src="static/images/mochi/house_new.mp4" type="video/mp4">   
+            </video>  
+        </div>  
+      </div>  
   </section>
 
     <div class="spacer"></div>
